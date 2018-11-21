@@ -6,22 +6,29 @@
    
 </template>
 <script>
+import {bus} from '../main.js';
 export default{
   props:{
     titulo:{
       type:String,
       required:true,
       default:'tareas'
-    },
-    numTareas:{
-      type:Number,
-      default:0
+    }
+  },
+  data(){
+    return{
+      numTareas:0
     }
   },
   methods:{
     tituloMayuscula(){
       return this.titulo.toUpperCase()
     }
+  },
+  created(){
+    bus.$on('actualizarContador',(numTareas)=>{
+      this.numTareas = numTareas;
+    })
   }
 }
 </script>

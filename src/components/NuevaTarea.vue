@@ -12,6 +12,7 @@
     </div>
 </template>
 <script>
+import {bus} from '../main.js';
 export default {
     data(){
        return{
@@ -28,11 +29,15 @@ export default {
                     terminada:false
                 });
 
-               this.incrementarContador();
+               //this.incrementarContador();
+               bus.actualizarContador(this.tareas.length);
             }
             this.nuevaTarea = '';
 
         }
+    },
+    created(){
+        bus.actualizarContador(this.tareas.length);
     }
 }
 </script>
