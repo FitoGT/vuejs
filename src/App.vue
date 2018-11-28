@@ -2,7 +2,7 @@
   <div id="app" class="container">
     <div class="jumbotron">
       <titulo :titulo="titulo"></titulo>
-      <nueva-tarea :tareas="tareas" :incrementarContador="incrementarContador"></nueva-tarea>
+      <nueva-tarea :tareas="tareas"></nueva-tarea>
       <lista-tareas :tareas="tareas"></lista-tareas>
     </div>
   </div>
@@ -12,6 +12,7 @@
 import Titulo from './components/Titulo.vue';
 import NuevaTarea from './components/NuevaTarea.vue';
 import ListaTareas from './components/ListaTareas.vue';
+import {bus} from './main.js';
 export default{
   components:{
     Titulo,
@@ -25,20 +26,22 @@ export default{
   },
   data(){
     return{
-      tareas:[
-        {
-            id:1,
-            texto:'Estudiar Vue',
-            terminada:false
-        },
-        {
-            id:2,
-            texto:'Laburar... tenes idea lo loco que suena eso?',
-            terminada:false
-        }
-      ],
+      tareas:[],
       titulo:'Mi Lista de tareas'
     }
+  },
+  created(){
+    this.$http.get('')
+        .then(response=>{
+          return response.json()
+        })
+        .then(json=>{
+          for(let id in json){
+            this.tareas.push(json[id]);
+            bus.actualizarContador(this.tareas.length);
+          }
+        });
+        
   }
 }
 </script>

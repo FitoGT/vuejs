@@ -28,6 +28,12 @@ export default {
                     texto:texto,
                     terminada:false
                 });
+                this.$http.post('',{
+                    texto:texto,
+                    terminada:false
+                }).then(response =>{
+                    console.log(response);
+                })
 
                //this.incrementarContador();
                bus.actualizarContador(this.tareas.length);

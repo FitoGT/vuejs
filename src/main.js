@@ -1,6 +1,8 @@
-import Vue from 'vue'
-import App from './App.vue'
-import VueResource from 'vue-resource'
+import Vue from 'vue';
+import App from './App.vue';
+import VueResource from 'vue-resource';
+
+
 export var bus = new Vue({
   methods:{
     actualizarContador(numTareas){
@@ -10,7 +12,7 @@ export var bus = new Vue({
 });
 
 Vue.use(VueResource);
-
+Vue.http.options.root='https://tareas-9923c.firebaseio.com/tareas.json';
 new Vue({
   el: '#app',
   render: h => h(App)
