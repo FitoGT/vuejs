@@ -31,13 +31,18 @@ export default{
     }
   },
   created(){
-    this.$http.get('')
+    this.$http.get('tareas.json')
         .then(response=>{
           return response.json()
         })
         .then(json=>{
           for(let id in json){
-            this.tareas.push(json[id]);
+            let tarea = {
+              id:id,
+              texto:json[id].texto,
+              terminada : json[id].terminada
+            }
+            this.tareas.push(tarea);
             bus.actualizarContador(this.tareas.length);
           }
         });

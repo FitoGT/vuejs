@@ -28,7 +28,7 @@ export default {
                     texto:texto,
                     terminada:false
                 });
-                this.$http.post('',{
+                this.$http.post('tareas.json',{
                     texto:texto,
                     terminada:false
                 }).then(response =>{

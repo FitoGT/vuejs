@@ -1,24 +1,43 @@
 <template>
      <ul class="list-group">
-        <li v-for="(tarea, indice) of tareas" :key="indice" class="list-group-item" v-bind:class="{terminada: tarea.terminada}">
+        <li v-for="(tarea, indice) of tareas" :key="indice" class="list-group-item" :class="{terminada: tarea.terminada}">
         {{ tarea.texto }}
         <span class="pull-right">
         <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-ok"
-                v-on:click="tarea.terminada = !tarea.terminada"       
+               @click="update(indice)"       
         ></button>
         <button type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"
-                v-on:click="borrar(indice)"       
+                @click="del(indice)"       
         ></button>
         </span>
         </li>
     </ul>
 </template>
 <script>
+import {bus} from '../main.js';
 export default {
     props:['tareas'],
     methods:{
-         borrar(indice){
-            this.tareas.splice(indice,1)
+        del(key){
+            let id = this.tareas[key].id; 
+            console.log(id);            
+            this.$http.delete(`tareas/${id}.json`)
+                .then(resp=>{
+                    this.tareas.splice(key,1)
+                    bus.actualizarContador(this.tareas.length);
+                    console.log(resp);
+                })
+        },
+        update(key){
+          let terminada = this.tareas[key].terminada =! this.tareas[key].terminada
+          let id = this.tareas[key].id; 
+          this.$http.patch(`tareas/${id}.json`,{
+              terminada
+          }).then(
+              resp=>{
+                  console.log(resp)
+              }
+          )  
         }
     }
 }

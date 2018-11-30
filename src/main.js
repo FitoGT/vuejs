@@ -12,7 +12,7 @@ export var bus = new Vue({
 });
 
 Vue.use(VueResource);
-Vue.http.options.root='https://tareas-9923c.firebaseio.com/tareas.json';
+Vue.http.options.root='https://tareas-9923c.firebaseio.com';
 new Vue({
   el: '#app',
   render: h => h(App)
