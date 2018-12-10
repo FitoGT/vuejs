@@ -14,7 +14,7 @@
     </ul>
 </template>
 <script>
-import {bus} from '../main.js';
+import {store} from '../main.js'
 export default {
     props:['tareas'],
     methods:{
@@ -24,7 +24,7 @@ export default {
             this.$http.delete(`tareas/${id}.json`)
                 .then(resp=>{
                     this.tareas.splice(key,1)
-                    bus.actualizarContador(this.tareas.length);
+                    store.commit('countTodos',this.tareas.length);
                     console.log(resp);
                 })
         },

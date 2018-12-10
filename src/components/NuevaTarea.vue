@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-import {bus} from '../main.js';
+import {store} from '../main.js';
 export default {
     data(){
        return{
@@ -36,14 +36,14 @@ export default {
                 })
 
                //this.incrementarContador();
-               bus.actualizarContador(this.tareas.length);
+               store.commit('countTodos',this.tareas.length);
             }
             this.nuevaTarea = '';
 
         }
     },
     created(){
-        bus.actualizarContador(this.tareas.length);
+        store.commit('countTodos',this.tareas.length);
     }
 }
 </script>

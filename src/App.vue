@@ -12,7 +12,7 @@
 import Titulo from './components/Titulo.vue';
 import NuevaTarea from './components/NuevaTarea.vue';
 import ListaTareas from './components/ListaTareas.vue';
-import {bus} from './main.js';
+import {store} from './main.js'
 export default{
   components:{
     Titulo,
@@ -43,7 +43,7 @@ export default{
               terminada : json[id].terminada
             }
             this.tareas.push(tarea);
-            bus.actualizarContador(this.tareas.length);
+            store.commit('countTodos',this.tareas.length);
           }
         });
         
