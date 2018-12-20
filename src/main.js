@@ -18,10 +18,7 @@ export var store = new Vuex.Store({
     count:0
   },
   getters:{
-    getCountTodos(state){
-      console.log(state.count)
-      return state.count;
-    }
+    getCountTodos: state => state.count,
   },
   mutations:{
     countTodos(state,numTodos){
@@ -29,7 +26,9 @@ export var store = new Vuex.Store({
     }
   },
   actions:{
-
+    countTodosAsync({commit},data){
+      commit('countTodos',data);
+    }
   }
 })
 

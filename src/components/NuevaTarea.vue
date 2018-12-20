@@ -36,7 +36,7 @@ export default {
                 })
 
                //this.incrementarContador();
-               store.commit('countTodos',this.tareas.length);
+               store.dispatch('countTodosAsync',this.tareas.length);
             }
             this.nuevaTarea = '';
 

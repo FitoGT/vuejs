@@ -24,7 +24,7 @@ export default {
             this.$http.delete(`tareas/${id}.json`)
                 .then(resp=>{
                     this.tareas.splice(key,1)
-                    store.commit('countTodos',this.tareas.length);
+                    store.dispatch('countTodosAsync',this.tareas.length);
                     console.log(resp);
                 })
         },
